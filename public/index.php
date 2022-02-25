@@ -2,19 +2,17 @@
 
 require __DIR__ . '/../vendor/autoload.php';
 
-use Alura\Cursos\Controller\FormularioInsercao;
-use Alura\Cursos\Controller\ListarCursos;
+use Alura\Cursos\Controller\InterfaceControladorRequisicao;
 
-switch($_SERVER['PATH_INFO']) {
-    case '/listar-cursos':
-        $controlador = new ListarCursos;
-        $controlador->processaRequisicao();
-        break;
-    case '/novo-curso':
-        $controlador = new FormularioInsercao;
-        $controlador->processaRequisicao();
-        break;
-    default:
-        echo 'A página solicitada não existe!';
-        break;
+$caminho = $_SERVER['PATH_INFO'];
+$routes = require __DIR__ . '/../config/routes.php';
+
+if (!array_key_exists($caminho, $routes)) {
+    http_response_code(404);
+    exit();
 }
+
+$classeControladora = $routes[$caminho];
+/** @var InterfaceControladorRequisicao $controlador */
+$controlador = new $classeControladora();
+$controlador->processaRequisicao();

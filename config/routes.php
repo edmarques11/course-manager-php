@@ -1,15 +1,13 @@
 <?php
 
-use Alura\Cursos\Controller\{
+use Alura\Cursos\Controller\{Deslogar,
     Exclusao,
+    FormularioEdicao,
     FormularioInsercao,
+    FormularioLogin,
     ListarCursos,
     Persistencia,
-    FormularioEdicao,
-    FormularioLogin,
-    RealizarLogin,
-    Deslogar
-};
+    RealizarLogin};
 
 return [
     '/listar-cursos' => ListarCursos::class,
@@ -19,5 +17,6 @@ return [
     '/alterar-curso' => FormularioEdicao::class,
     '/login' => FormularioLogin::class,
     '/realiza-login' => RealizarLogin::class,
-    '/logout' => Deslogar::class
+    '/logout' => Deslogar::class,
 ];
+
